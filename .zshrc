@@ -4,22 +4,22 @@
 # load version control information
 autoload -Uz vcs_info
 precmd() { vcs_info }
- 
+
 # format vcs_info variable
 zstyle ':vcs_info:git:*' formats ' -> %F{green}%b%f'
 zstyle ':vcs_info:*' check-for-changes true
- 
+
 # set up the prompt
 setopt PROMPT_SUBST
 PROMPT='[%# %F{cyan}%1~%f${vcs_info_msg_0_}] $ '
- 
+
 # default is %n@%m %1~ %#
 #export PROMPT="[$ %1~] %# "
 # this is the one I usually use vvv
 #export PROMPT="[%# %1~] $ "
 #export PROMPT="[%1~] $ "
 #export PROMPT="[%1~] %# "
- 
+
 alias v='nvim'
 alias py='python3 '
 alias gs='git status'
@@ -29,18 +29,10 @@ alias gr='./gradlew run'
 alias tn='(){tmux new -s $1}'
 
 alias activate='source .venv/bin/activate'
- 
+
 autoload -Uz compinit && compinit
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 setopt nocaseglob
-
-source ~/.config/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-
-# Set up the prompt
-
-# autoload -Uz promptinit
-# promptinit
-# prompt adam1
 
 setopt histignorealldups sharehistory
 
@@ -51,10 +43,6 @@ setopt histignorealldups sharehistory
 HISTSIZE=1000
 SAVEHIST=1000
 HISTFILE=~/.zsh_history
-
-# Use modern completion system
-# autoload -Uz compinit
-# compinit
 
 zstyle ':completion:*' auto-description 'specify: %d'
 zstyle ':completion:*' completer _expand _complete _correct _approximate
@@ -69,6 +57,9 @@ zstyle ':completion:*' menu select=long
 zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
 zstyle ':completion:*' use-compctl false
 zstyle ':completion:*' verbose true
-
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
+
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.config/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+
