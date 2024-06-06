@@ -102,6 +102,23 @@ return { -- LSP Configuration & Plugins
         local capabilities = vim.lsp.protocol.make_client_capabilities()
         capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
+        -- Specify how the border looks like
+        local border = {
+            { '┌', 'FloatBorder' },
+            { '─', 'FloatBorder' },
+            { '┐', 'FloatBorder' },
+            { '│', 'FloatBorder' },
+            { '┘', 'FloatBorder' },
+            { '─', 'FloatBorder' },
+            { '└', 'FloatBorder' },
+            { '│', 'FloatBorder' },
+        }
+        -- Add the border on hover and on signature help popup window
+        local handlers = {
+            ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
+            ['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
+        }
+
         -- Enable the following language servers
         --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
         --
@@ -195,6 +212,7 @@ return { -- LSP Configuration & Plugins
                     -- by the server configuration above. Useful when disabling
                     -- certain features of an LSP (for example, turning off formatting for tsserver)
                     server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
+                    server.handlers = handlers
                     require('lspconfig')[server_name].setup(server)
                 end,
             },

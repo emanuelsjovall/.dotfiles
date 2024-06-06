@@ -1,6 +1,7 @@
 # Dotfiles 
 
 clone repo into home folder then run gnu stow inside this repo like such
+Make sure that the ~/.config folder exists before running
 ```
 stow .
 ```
