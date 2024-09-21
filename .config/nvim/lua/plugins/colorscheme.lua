@@ -17,22 +17,22 @@ return {
         vim.cmd("highlight StatusLineNC cterm=none ctermfg=black ctermbg=black guifg=white guibg=white")
 
         -- to enable the border around telescope
-        local TelescopeColor = {
-            -- TelescopeMatching = { fg = "white" },
-            -- TelescopeSelection = { fg = "white", bold = true },
+        --[[ local TelescopeColor = {
+            TelescopeMatching = { fg = "white" },
+            TelescopeSelection = { fg = "white", bold = true },
 
-            -- TelescopePromptBorder = { fg = "grey" },
-            -- TelescopeResultsBorder = { fg = "grey" },
-            -- TelescopePreviewBorder = { fg = "grey" },
+            TelescopePromptBorder = { fg = "grey" },
+            TelescopeResultsBorder = { fg = "grey" },
+            TelescopePreviewBorder = { fg = "grey" },
 
-            -- TelescopePromptTitle = { fg = "white" },
-            -- TelescopeResultsTitle = { fg = "white" },
-            -- TelescopePreviewTitle = { fg = "white" },
+            TelescopePromptTitle = { fg = "white" },
+            TelescopeResultsTitle = { fg = "white" },
+            TelescopePreviewTitle = { fg = "white" },
         }
 
-        -- for hl, col in pairs(TelescopeColor) do
-        --     vim.api.nvim_set_hl(0, hl, col)
-        -- end
+        for hl, col in pairs(TelescopeColor) do
+            vim.api.nvim_set_hl(0, hl, col)
+        end ]]
     end,
 }
 
