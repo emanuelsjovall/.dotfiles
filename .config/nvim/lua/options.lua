@@ -1,3 +1,7 @@
+vim.g.loaded_perl_provider = 0
+vim.g.loaded_ruby_provider = 0
+
+
 local o = vim.opt
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
