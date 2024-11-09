@@ -21,7 +21,7 @@ o.splitright = true
 o.wrap = false
 
 -- Minimal number of screen lines to keep above and below the cursor.
-o.scrolloff = 5 
+o.scrolloff = 5
 o.fileencoding = "utf-8"
 o.termguicolors = true
 
@@ -79,47 +79,47 @@ o.timeoutlen = 300
 -- doing this makes startup slower in wsl2 ubuntu not sure about other use cases so we do autocmd magic instead to keep startup fast
 -- https://www.reddit.com/r/neovim/comments/1293o2y/vimoptclipboard_unnamedplus_is_very_slow/
 -- o.clipboard = 'unnamedplus'
-vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
-    once = true,
-    callback = function()
-    -- or vim.fn.has("wsl") == 1 this could be here aswell but i dont want to install win32yank so we stick to xclip for wsl2 since it works
-      if vim.fn.has("win32") == 1 then
-        vim.g.clipboard = {
-          copy = {
-            ["+"] = "win32yank.exe -i --crlf",
-            ["*"] = "win32yank.exe -i --crlf",
-          },
-          paste = {
-            ["+"] = "win32yank.exe -o --lf",
-            ["*"] = "win32yank.exe -o --lf",
-          },
-        }
-      elseif vim.fn.has("unix") == 1 then
-        if vim.fn.executable("xclip") == 1 then
-          vim.g.clipboard = {
-            copy = {
-              ["+"] = "xclip -selection clipboard",
-              ["*"] = "xclip -selection clipboard",
-            },
-            paste = {
-              ["+"] = "xclip -selection clipboard -o",
-              ["*"] = "xclip -selection clipboard -o",
-            },
-          }
-        elseif vim.fn.executable("xsel") == 1 then
-          vim.g.clipboard = {
-            copy = {
-              ["+"] = "xsel --clipboard --input",
-              ["*"] = "xsel --clipboard --input",
-            },
-            paste = {
-              ["+"] = "xsel --clipboard --output",
-              ["*"] = "xsel --clipboard --output",
-            },
-          }
-        end
-      end
-      o.clipboard = "unnamedplus"
-    end,
-    desc = "Lazy load clipboard",
-})
+-- vim.api.nvim_create_autocmd({ "BufReadPost", "BufNewFile" }, {
+--     once = true,
+--     callback = function()
+--     -- or vim.fn.has("wsl") == 1 this could be here aswell but i dont want to install win32yank so we stick to xclip for wsl2 since it works
+--       if vim.fn.has("win32") == 1 then
+--         vim.g.clipboard = {
+--           copy = {
+--             ["+"] = "win32yank.exe -i --crlf",
+--             ["*"] = "win32yank.exe -i --crlf",
+--           },
+--           paste = {
+--             ["+"] = "win32yank.exe -o --lf",
+--             ["*"] = "win32yank.exe -o --lf",
+--           },
+--         }
+--       elseif vim.fn.has("unix") == 1 then
+--         if vim.fn.executable("xclip") == 1 then
+--           vim.g.clipboard = {
+--             copy = {
+--               ["+"] = "xclip -selection clipboard",
+--               ["*"] = "xclip -selection clipboard",
+--             },
+--             paste = {
+--               ["+"] = "xclip -selection clipboard -o",
+--               ["*"] = "xclip -selection clipboard -o",
+--             },
+--           }
+--         elseif vim.fn.executable("xsel") == 1 then
+--           vim.g.clipboard = {
+--             copy = {
+--               ["+"] = "xsel --clipboard --input",
+--               ["*"] = "xsel --clipboard --input",
+--             },
+--             paste = {
+--               ["+"] = "xsel --clipboard --output",
+--               ["*"] = "xsel --clipboard --output",
+--             },
+--           }
+--         end
+--       end
+--       o.clipboard = "unnamedplus"
+--     end,
+--     desc = "Lazy load clipboard",
+-- })

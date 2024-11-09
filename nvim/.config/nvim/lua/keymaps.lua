@@ -53,10 +53,11 @@ vim.keymap.set('v', '<S-Tab>', '<gv', { desc = '[I]ndent selected text to the le
 vim.keymap.set('v', '<Tab>', '>gv', { desc = '[I]ndent selected text to the right' })
 vim.keymap.set('v', '<BS>', 'd', { desc = '[B]ackspace selected text' })
 
-vim.keymap.set('v', '<C-c>', 'y', { desc = '[C]opy selected text' })
-vim.keymap.set('i', '<C-x>', '<ESC>ddA', { desc = '[C]ut selected text' })
-vim.keymap.set('i', '<C-v>', '<ESC>pa', { desc = '[P]aste text' })
-vim.keymap.set('n', '<C-v>', 'p', { desc = '[P]aste text' })
+vim.keymap.set('v', '<leader>y', '"+y', { desc = '[C]opy selected text to system clipboard' })
+vim.keymap.set('i', '<C-x>', '<ESC>ddA', { desc = '[C]ut selected text to system clipboard' })
+--vim.keymap.set('i', '<C-v>p', '<ESC>"+pa', { desc = '[P]aste text from system clipboard' })
+vim.keymap.set('n', '<leader>p', '"+p', { desc = '[P]aste text from system clipboard' })
+vim.keymap.set('v', '<leader>p', '"+p', { desc = '[P]aste text from system clipboard'})
 vim.keymap.set('i', '<C-z>', '<ESC>ua', { desc = '[U]ndo' })
 vim.keymap.set('n', '<C-z>', 'u', { desc = '[U]ndo' })
 
