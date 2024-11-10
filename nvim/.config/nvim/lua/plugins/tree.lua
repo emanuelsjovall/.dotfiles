@@ -30,7 +30,7 @@ return {
 
     require("neo-tree").setup({
       filesystem = {
-        hijack_netrw_behavior = "open_current",  -- use disabled for normal netrw
+        hijack_netrw_behavior = "disabled",  -- use disabled for normal netrw
       }
     })
   end
