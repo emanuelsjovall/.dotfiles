@@ -1,6 +1,9 @@
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
 
+vim.g.sleuth_c_heuristics = 0
+-- to see when a setting was last set use :verbose set shiftwidth?
+-- where shiftwidth is the setting
 
 local o = vim.opt
 vim.g.mapleader = ' '
