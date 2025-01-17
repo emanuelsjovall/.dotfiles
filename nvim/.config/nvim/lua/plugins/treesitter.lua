@@ -1,14 +1,15 @@
 return {
   "nvim-treesitter/nvim-treesitter",
+  enabled = true,
   build = ":TSUpdate",
   config = function()
     require("nvim-treesitter.configs").setup({
-      ensure_installed = {"lua", "vimdoc", "python"},
+      ensure_installed = {"lua", "vimdoc"},
       auto_install = true,
       indent = { enable = true },
 
       highlight = {
-        enable = true,
+        --enable = true,
 
         -- NOTE: these are the names of the parsers and not the filetype. (for example if you want to
         -- disable highlighting for the `tex` filetype, you need to include `latex` in this list as this is

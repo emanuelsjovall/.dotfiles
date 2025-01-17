@@ -1,6 +1,7 @@
 -- Useful plugin to show you pending keybinds.
 return {
     'folke/which-key.nvim',
+    enabled = true,
     event = 'VimEnter', -- Sets the loading event to 'VimEnter'
     keys = {
         { "<leader>c", group = "[C]ode" },

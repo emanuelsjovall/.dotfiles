@@ -1,5 +1,6 @@
 return {
     "hiphish/rainbow-delimiters.nvim",
+    enabled = true,
     config = function()
         vim.api.nvim_set_hl(0, "CustomRainbowYellow",    {default = true, fg = "#FFD701", ctermfg= "Yellow" })
         vim.api.nvim_set_hl(0, "CustomRainbowMagenta",   {default = true, fg = "#DA71D6", ctermfg= "Magenta" })
