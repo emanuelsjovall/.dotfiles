@@ -9,6 +9,7 @@ return {
             query = {
                 [""] = "rainbow-delimiters",
                 tsx = "rainbow-custom",
+                go = "rainbow-custom",
             },
             highlight = {
                 "CustomRainbowYellow",
@@ -18,6 +19,10 @@ return {
         }
     end,
 }
+
+-- :Inspect to show the highlight groups under the cursor
+-- :InspectTree to show the parsed syntax tree ("TSPlayground")
+-- :EditQuery to open the Live Query Editor (Nvim 0.10+)
 
 -- Default rainbow 
 -- "RainbowDelimiterRed",
