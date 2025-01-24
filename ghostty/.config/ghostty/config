@@ -1,0 +1,9 @@
+# use ghostty +list-themes to see all themes
+
+# theme = Dark+
+theme = Dark Modern
+
+font-family = FiraCode Nerd Font
+font-feature = -calt
+font-feature = -liga
+font-feature = -dlig
