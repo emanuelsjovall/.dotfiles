@@ -61,6 +61,8 @@ vim.keymap.set('v', '<leader>p', '"+p', { desc = '[P]aste text from system clipb
 vim.keymap.set('i', '<C-z>', '<ESC>ua', { desc = '[U]ndo' })
 vim.keymap.set('n', '<C-z>', 'u', { desc = '[U]ndo' })
 
+vim.keymap.set('n', '<leader>o', ':Ex<CR>', { desc = '[O]pen file browser'})
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
