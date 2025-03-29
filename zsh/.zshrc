@@ -62,3 +62,5 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 source ~/.config/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+export NVM_LAZY_LOAD=true
+source "$HOME/.zsh-nvm.zsh"
