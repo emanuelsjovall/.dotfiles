@@ -79,6 +79,9 @@ o.timeoutlen = 300
 -- to disable highlight of matching parenthesis 
 -- vim.g.loaded_matchparen = 1
 
+-- vim.diagnostic.config({ virtual_text = true, virtual_lines = { current_line = true }})
+vim.diagnostic.config({ virtual_text = true, virtual_lines = false })
+
 -- doing this makes startup slower in wsl2 ubuntu not sure about other use cases so we do autocmd magic instead to keep startup fast
 -- https://www.reddit.com/r/neovim/comments/1293o2y/vimoptclipboard_unnamedplus_is_very_slow/
 -- o.clipboard = 'unnamedplus'
