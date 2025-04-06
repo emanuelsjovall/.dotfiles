@@ -3,17 +3,21 @@ return { -- LSP Configuration & Plugins
     enabled = true,
     dependencies = {
         -- Automatically install LSPs and related tools to stdpath for Neovim
-        'williamboman/mason.nvim',
+        -- Mason must be loaded before its dependents so we need to set it up here.
+        -- NOTE: `opts = {}` is the same as calling `require('mason').setup({})`
+        { 'williamboman/mason.nvim', opts = {} },
         'williamboman/mason-lspconfig.nvim',
         'WhoIsSethDaniel/mason-tool-installer.nvim',
 
         -- Useful status updates for LSP.
-        -- NOTE: `opts = {}` is the same as calling `require('fidget').setup({})`
         { 'j-hui/fidget.nvim', opts = {} },
 
         -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
         -- used for completion, annotations and signatures of Neovim apis
         { 'folke/neodev.nvim', opts = {} },
+
+        -- Allows extra capabilites provided by nvim-cmp
+        'hrsh7th/cmp-nvim-lsp',
     },
     config = function()
         -- If you're wondering about lsp vs treesitter, you can check out the wonderfully
@@ -31,8 +35,9 @@ return { -- LSP Configuration & Plugins
                 --
                 -- In this case, we create a function that lets us more easily define mappings specific
                 -- for LSP related items. It sets the mode, buffer and description for us each time.
-                local map = function(keys, func, desc)
-                    vim.keymap.set('n', keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
+                local map = function(keys, func, desc, mode)
+                    mode = mode or 'n'
+                    vim.keymap.set(mode, keys, func, { buffer = event.buf, desc = 'LSP: ' .. desc })
                 end
 
                 -- Jump to the definition of the word under your cursor.
@@ -91,7 +96,7 @@ return { -- LSP Configuration & Plugins
                 end
 
                 -- keymap to open signateur help (not sure if we need to pass in buffer) https://github.com/nvim-lua/kickstart.nvim/pull/1433 there is function here to do it on insert i think
-                vim.keymap.set('i', '<C-k>', vim.lsp.buf.signature_help, { buffer = event.buf, desc = 'LSP: [C]trl [K] signature help' })
+                map('<C-k>', vim.lsp.buf.signature_help, '[C]trl [K] signature help', 'i')
 
                 -- The following two autocommands are used to highlight references of the
                 -- word under your cursor when your cursor rests there for a little while.
@@ -141,6 +146,35 @@ return { -- LSP Configuration & Plugins
             end,
         })
 
+        -- Diagnostic Config
+        -- See :help vim.diagnostic.Opts
+        vim.diagnostic.config({
+          severity_sort = true,
+          float = { border = 'rounded', source = 'if_many' },
+          underline = { severity = vim.diagnostic.severity.ERROR },
+          signs = vim.g.have_nerd_font and {
+            text = {
+              [vim.diagnostic.severity.ERROR] = '󰅚 ',
+              [vim.diagnostic.severity.WARN] = '󰀪 ',
+              [vim.diagnostic.severity.INFO] = '󰋽 ',
+              [vim.diagnostic.severity.HINT] = '󰌶 ',
+            },
+          } or {},
+          virtual_text = {
+            source = 'if_many',
+            spacing = 2,
+            format = function(diagnostic)
+              local diagnostic_message = {
+                [vim.diagnostic.severity.ERROR] = diagnostic.message,
+                [vim.diagnostic.severity.WARN] = diagnostic.message,
+                [vim.diagnostic.severity.INFO] = diagnostic.message,
+                [vim.diagnostic.severity.HINT] = diagnostic.message,
+              }
+              return diagnostic_message[diagnostic.severity]
+            end,
+          },
+        })
+
         -- LSP servers and clients are able to communicate to each other what features they support.
         --  By default, Neovim doesn't support everything that is in the LSP specification.
         --  When you add nvim-cmp, luasnip, etc. Neovim now has *more* capabilities.
@@ -148,7 +182,7 @@ return { -- LSP Configuration & Plugins
         local capabilities = vim.lsp.protocol.make_client_capabilities()
         capabilities = vim.tbl_deep_extend('force', capabilities, require('cmp_nvim_lsp').default_capabilities())
 
-        -- Specify how the border looks like
+        -- custom border to use in the floating windows that popup
         local border = {
             { '┌', 'FloatBorder' },
             { '─', 'FloatBorder' },
@@ -159,11 +193,17 @@ return { -- LSP Configuration & Plugins
             { '└', 'FloatBorder' },
             { '│', 'FloatBorder' },
         }
-        -- Add the border on hover and on signature help popup window
-        local handlers = {
-            ['textDocument/hover'] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
-            ['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
-        }
+        -- https://github.com/neovim/neovim/discussions/32045
+        local rounded_wrapper = function(opener)
+            return function(contents, syntax, opts)
+                opts = vim.tbl_deep_extend("force", opts, { border = border })
+                -- opts = vim.tbl_deep_extend("force", opts, { border = "rounded" })
+                return opener(contents, syntax, opts)
+            end
+        end
+
+        local default_opener = vim.lsp.util.open_floating_preview
+        vim.lsp.util.open_floating_preview = rounded_wrapper(default_opener)
 
         -- Enable the following language servers
         --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
@@ -230,7 +270,7 @@ return { -- LSP Configuration & Plugins
         --    :Mason
         --
         --  You can press `g?` for help in this menu.
-        require('mason').setup()
+        --  Mason got setup earlier in the dependents so change there to modify mason options
 
         -- You can add other tools here that you want Mason to install
         -- for you, so that they are available from within Neovim.
@@ -238,9 +278,11 @@ return { -- LSP Configuration & Plugins
         vim.list_extend(ensure_installed, {
             'stylua', -- Used to format Lua code
         })
-        require('mason-tool-installer').setup { ensure_installed = ensure_installed }
+        require('mason-tool-installer').setup({ ensure_installed = ensure_installed })
 
-        require('mason-lspconfig').setup {
+        require('mason-lspconfig').setup({
+            ensure_installed = {},
+            automatic_installation = false,
             handlers = {
                 function(server_name)
                     local server = servers[server_name] or {}
@@ -248,10 +290,9 @@ return { -- LSP Configuration & Plugins
                     -- by the server configuration above. Useful when disabling
                     -- certain features of an LSP (for example, turning off formatting for tsserver)
                     server.capabilities = vim.tbl_deep_extend('force', {}, capabilities, server.capabilities or {})
-                    server.handlers = handlers
                     require('lspconfig')[server_name].setup(server)
                 end,
             },
-        }
+        })
     end,
 }

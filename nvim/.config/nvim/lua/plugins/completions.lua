@@ -34,14 +34,25 @@ return { -- Autocompletion
         --  into multiple repos for maintenance purposes.
         'hrsh7th/cmp-nvim-lsp',
         'hrsh7th/cmp-path',
+        'hrsh7th/cmp-nvim-lsp-signature-help',
     },
     config = function()
         -- See `:help cmp`
         local cmp = require 'cmp'
         local luasnip = require 'luasnip'
-        luasnip.config.setup {}
+        luasnip.config.setup({})
 
-        cmp.setup {
+        local border = {
+            { '┌', 'FloatBorder' },
+            { '─', 'FloatBorder' },
+            { '┐', 'FloatBorder' },
+            { '│', 'FloatBorder' },
+            { '┘', 'FloatBorder' },
+            { '─', 'FloatBorder' },
+            { '└', 'FloatBorder' },
+            { '│', 'FloatBorder' },
+        }
+        cmp.setup({
             snippet = {
                 expand = function(args)
                     luasnip.lsp_expand(args.body)
@@ -49,8 +60,8 @@ return { -- Autocompletion
             },
             completion = { completeopt = 'menu,menuone,noinsert' },
             window = {
-                completion = cmp.config.window.bordered(),
-                documentation = cmp.config.window.bordered(),
+                completion = cmp.config.window.bordered({ border = border }),
+                documentation = cmp.config.window.bordered({ border = border }),
             },
 
             -- For an understanding of why these mappings were
@@ -104,7 +115,8 @@ return { -- Autocompletion
                 { name = 'nvim_lsp' },
                 { name = 'luasnip' },
                 { name = 'path' },
+                { name = 'nvim_lsp_signature_help' },
             },
-        }
+        })
     end,
 }
