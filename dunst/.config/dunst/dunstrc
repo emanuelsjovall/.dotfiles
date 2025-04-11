@@ -374,6 +374,11 @@
     # Icon for notifications with critical urgency
     default_icon = dialog-warning
 
+# use dunst -print to see info about incoming notifications
+[skip-rule]
+    appname = "Spotify"
+    skip_display = True
+
 # Every section that isn't one of the above is interpreted as a rules to
 # override settings for certain messages.
 #
