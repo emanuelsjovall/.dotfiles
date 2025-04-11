@@ -7,5 +7,13 @@ font-family = FiraCode Nerd Font
 font-feature = -calt
 font-feature = -liga
 font-feature = -dlig
+# to stop tmux from having some weird empty space on the bottom this might have to be different on different screens
+# https://i.sstatic.net/l1qJf.png
+font-size = 14
+
 
 background-opacity = 0.9
+
+# https://github.com/ghostty-org/ghostty/discussions/2811
+keybind = performable:ctrl+v=paste_from_clipboard
+keybind = performable:ctrl+c=copy_to_clipboard
