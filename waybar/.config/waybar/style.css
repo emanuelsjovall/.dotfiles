@@ -1,13 +1,21 @@
+@import "mocha.css";
+
 * {
     /* `otf-font-awesome` is required to be installed for icons */
-    font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif;
-    font-size: 13px;
+    font-family: FiraCode Nerd Font Mono Bold;
+    /* font-family: FontAwesome, Roboto, Helvetica, Arial, sans-serif; */
+    font-size: 16px;
+    font-weight: bold;
 }
 
 window#waybar {
-    background-color: rgba(43, 48, 59, 0.5);
-    border-bottom: 3px solid rgba(100, 114, 125, 0.5);
-    color: #ffffff;
+    background: transparent;
+    background-color: @crust;
+    /* background-color: rgba(43, 48, 59, 0.5); */
+    /* border-bottom: 3px solid rgba(100, 114, 125, 0.5); */
+    /* color: #ffffff; */
+    border-bottom: 1px solid @overlay1;
+    color: @overlay0;
     transition-property: background-color;
     transition-duration: .5s;
 }
@@ -45,7 +53,8 @@ button {
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 button:hover {
     background: inherit;
-    box-shadow: inset 0 -3px #ffffff;
+    color: @mauve;
+    border-top: 2px solid @mauve;
 }
 
 /* you can set a style on hover for any module like this */
@@ -55,47 +64,45 @@ button:hover {
 
 #workspaces button {
     padding: 0 5px;
-    background-color: transparent;
     color: #ffffff;
 }
 
-#workspaces button:hover {
-    background: rgba(0, 0, 0, 0.2);
+#workspaces button.focused {
+    background-color: rgba(0, 0, 0, 0.3);
+    color: @rosewater;
+    border-top: 2px solid @rosewater;
 }
 
-#workspaces button.focused {
-    background-color: #64727D;
-    box-shadow: inset 0 -3px #ffffff;
+#workspaces button.active {
+    background-color: rgba(0, 0, 0, 0.3);
+    color: @mauve;
+    border-top: 2px solid @mauve;
 }
 
 #workspaces button.urgent {
     background-color: #eb4d4b;
 }
 
-#mode {
-    background-color: #64727D;
-    box-shadow: inset 0 -3px #ffffff;
-}
-
 #clock,
 #battery,
-#cpu,
-#memory,
-#disk,
-#temperature,
 #backlight,
 #network,
 #pulseaudio,
 #wireplumber,
 #custom-media,
 #tray,
-#mode,
 #idle_inhibitor,
 #scratchpad,
 #power-profiles-daemon,
 #mpd {
-    padding: 0 10px;
-    color: #ffffff;
+    /* padding: 0 10px; */
+    /* color: #ffffff; */
+    margin-top: 2px;
+    margin-bottom: 2px;
+    margin-left: 4px;
+    margin-right: 4px;
+    padding-left: 4px;
+    padding-right: 4px;
 }
 
 #window,
@@ -114,12 +121,19 @@ button:hover {
 }
 
 #clock {
-    background-color: #64727D;
+    color: @maroon;
+    border-bottom: 2px solid @maroon;
+}
+
+#clock.date {
+    color: @mauve;
+    border-bottom: 2px solid @mauve;
 }
 
 #battery {
-    background-color: #ffffff;
-    color: #000000;
+    color: @green;
+    border-bottom: 2px solid @green;
+    background-color: #ffffff; /* From default I do not have battery to test it with */
 }
 
 #battery.charging, #battery.plugged {
@@ -168,25 +182,14 @@ label:focus {
     background-color: #000000;
 }
 
-#cpu {
-    background-color: #2ecc71;
-    color: #000000;
-}
-
-#memory {
-    background-color: #9b59b6;
-}
-
-#disk {
-    background-color: #964B00;
-}
-
 #backlight {
     background-color: #90b1b1;
 }
 
 #network {
-    background-color: #2980b9;
+    /* background-color: #2980b9; */
+    color: @yellow;
+    border-bottom: 2px solid @yellow;
 }
 
 #network.disconnected {
@@ -194,13 +197,13 @@ label:focus {
 }
 
 #pulseaudio {
-    background-color: #f1c40f;
-    color: #000000;
+    color: @blue;
+    border-bottom: 2px solid @blue;
 }
 
 #pulseaudio.muted {
-    background-color: #90b1b1;
-    color: #2a5c45;
+    color: @blue;
+    border-bottom: 2px solid @blue;
 }
 
 #wireplumber {
@@ -215,7 +218,6 @@ label:focus {
 #custom-media {
     background-color: #66cc99;
     color: #2a5c45;
-    min-width: 100px;
 }
 
 #custom-media.custom-spotify {
@@ -226,16 +228,24 @@ label:focus {
     background-color: #ffa000;
 }
 
-#temperature {
-    background-color: #f0932b;
+.custom-spotify {
+    padding: 0 4px;
+    /* margin: 0 4px; */
+    /* background-color: #1DB954; */
+    color: #1DB954;
+    border-bottom: 2px solid #1DB954;
 }
 
-#temperature.critical {
-    background-color: #eb4d4b;
+#custom-exit {
+    /* margin: 0px 20px 0px 0px; */
+    /* padding:0px; */
+    font-size: 25px;
+    color: white;
 }
 
 #tray {
-    background-color: #2980b9;
+    /* background-color: #2980b9; */
+    border-bottom: 2px solid white;
 }
 
 #tray > .passive {
@@ -245,15 +255,6 @@ label:focus {
 #tray > .needs-attention {
     -gtk-icon-effect: highlight;
     background-color: #eb4d4b;
-}
-
-#idle_inhibitor {
-    background-color: #2d3436;
-}
-
-#idle_inhibitor.activated {
-    background-color: #ecf0f1;
-    color: #2d3436;
 }
 
 #mpd {
@@ -302,7 +303,7 @@ label:focus {
 }
 
 #scratchpad.empty {
-	background-color: transparent;
+    background-color: transparent;
 }
 
 #privacy {
