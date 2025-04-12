@@ -63,6 +63,13 @@ vim.keymap.set('n', '<C-z>', 'u', { desc = '[U]ndo' })
 
 vim.keymap.set('n', '<leader>o', ':Ex<CR>', { desc = '[O]pen file browser'})
 
+-- New default lsp keybind, I kinda like not having to do g<...> before them so I will keep the old ones for now and remove the new ones
+-- https://github.com/nvim-lua/kickstart.nvim/issues/1436
+vim.keymap.del('n', 'grn')
+vim.keymap.del('n', 'grr')
+vim.keymap.del('n', 'gri')
+vim.keymap.del('n', 'gra')
+
 -- [[ Basic Autocommands ]]
 --  See `:help lua-guide-autocommands`
 
