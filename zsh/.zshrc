@@ -62,5 +62,11 @@ zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
 source ~/.config/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
+# to hop by word or line with ctrl or alt and arrow keys
+bindkey "^[[1;5C" forward-word
+bindkey "^[[1;5D" backward-word
+bindkey "^[[1;3C" end-of-line
+bindkey "^[[1;3D" beginning-of-line
+
 export NVM_LAZY_LOAD=true
 source "$HOME/.zsh-nvm.zsh"
