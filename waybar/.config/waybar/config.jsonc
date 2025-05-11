@@ -9,9 +9,9 @@
     "modules-left": [
         "hyprland/workspaces"
     ],
-    "modules-center": [
-        "hyprland/window"
-    ],
+    // "modules-center": [
+    //     "hyprland/window"
+    // ],
     "modules-right": [
         "custom/spotify",
         "mpd",
@@ -142,7 +142,8 @@
         "on-click": "pavucontrol"
     },
     "custom/spotify": {
-        "exec": "/usr/bin/python3 $HOME/.config/waybar/mediaplayer.py --player spotify",
+        "exec": "$HOME/.config/waybar/mediaplayer 2> /dev/null", // my own go implementation not very good code wise but uses ~6-7MB per monitor so like 1 extra chrome tab in total?
+        // "exec": "/usr/bin/python3 $HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null", // this one is more feature complete but uses ~29-30MB of memery per monitor it runs on
         // "format": "{} ",
         "format": "{}",
         "return-type": "json",
