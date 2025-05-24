@@ -44,35 +44,12 @@
             // "default": ""
         }
     },
-    "mpd": {
-        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
-        "format-disconnected": "Disconnected ",
-        "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
-        "unknown-tag": "N/A",
-        "interval": 5,
-        "consume-icons": {
-            "on": " "
-        },
-        "random-icons": {
-            "off": "<span color=\"#f53c3c\"></span> ",
-            "on": " "
-        },
-        "repeat-icons": {
-            "on": " "
-        },
-        "single-icons": {
-            "on": "1 "
-        },
-        "state-icons": {
-            "paused": "",
-            "playing": ""
-        },
-        "tooltip-format": "MPD (connected)",
-        "tooltip-format-disconnected": "MPD (disconnected)"
-    },
     "tray": {
         // "icon-size": 21,
-        "spacing": 10
+        "spacing": 10,
+
+        // https://github.com/Alexays/Waybar/issues/2698
+        "show-passive-items": true
     },
     "clock": {
         // "timezone": "America/New_York",
@@ -148,6 +125,10 @@
         "format": "{}",
         "return-type": "json",
         "on-click": "playerctl play-pause -p spotify",
+
+        // while we do not need or use the response from --print-reply it does not work without it for some reason
+        "on-click-middle": "dbus-send --print-reply --dest=org.mpris.MediaPlayer2.spotify /org/mpris/MediaPlayer2 org.mpris.MediaPlayer2.Quit",
+        "on-click-right": "spotify",
         "on-scroll-up": "playerctl next",
         "on-scroll-down": "playerctl previous",
         // "max-length": 30,
@@ -155,12 +136,12 @@
         "escape": true
     },
     "custom/exit": {
-        "format" : "⏻",
+        "format" : "[ ⏻ ]",
         "tooltip": false,
         "menu": "on-click",
         "menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder
         "menu-actions": {
-            "shutdown": "shutdown",
+            "shutdown": "shutdown now",
             "reboot": "reboot",
             "suspend": "systemctl suspend",
             "hibernate": "systemctl hibernate"

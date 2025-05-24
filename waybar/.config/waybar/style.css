@@ -90,11 +90,11 @@ button:hover {
 #pulseaudio,
 #wireplumber,
 #custom-media,
+#custom-exit,
 #tray,
 #idle_inhibitor,
 #scratchpad,
-#power-profiles-daemon,
-#mpd {
+#power-profiles-daemon {
     /* padding: 0 10px; */
     /* color: #ffffff; */
     margin-top: 2px;
@@ -255,23 +255,6 @@ label:focus {
 #tray > .needs-attention {
     -gtk-icon-effect: highlight;
     background-color: #eb4d4b;
-}
-
-#mpd {
-    background-color: #66cc99;
-    color: #2a5c45;
-}
-
-#mpd.disconnected {
-    background-color: #f53c3c;
-}
-
-#mpd.stopped {
-    background-color: #90b1b1;
-}
-
-#mpd.paused {
-    background-color: #51a37a;
 }
 
 #language {
