@@ -1,4 +1,5 @@
 @import "mocha.css";
+@define-color green #1DB954;
 
 * {
     /* `otf-font-awesome` is required to be installed for icons */
@@ -10,12 +11,14 @@
 
 window#waybar {
     background: transparent;
-    background-color: @crust;
+    /* background-color: @crust; */
+
     /* background-color: rgba(43, 48, 59, 0.5); */
     /* border-bottom: 3px solid rgba(100, 114, 125, 0.5); */
     /* color: #ffffff; */
-    border-bottom: 1px solid @overlay1;
-    color: @overlay0;
+
+    /* border-bottom: 1px solid @overlay1; */
+    /* color: @overlay0; */
     transition-property: background-color;
     transition-duration: .5s;
 }
@@ -89,7 +92,7 @@ button:hover {
 #network,
 #pulseaudio,
 #wireplumber,
-#custom-media,
+#custom-spotify,
 #custom-exit,
 #tray,
 #idle_inhibitor,
@@ -97,12 +100,13 @@ button:hover {
 #power-profiles-daemon {
     /* padding: 0 10px; */
     /* color: #ffffff; */
-    margin-top: 2px;
+    margin-top: 0px;
     margin-bottom: 2px;
     margin-left: 4px;
-    margin-right: 4px;
-    padding-left: 4px;
-    padding-right: 4px;
+    margin-right: 2px;
+    padding-left: 0px;
+    padding-right: 0px;
+    /* border: solid white 2px; */
 }
 
 #window,
@@ -122,17 +126,12 @@ button:hover {
 
 #clock {
     color: @maroon;
-    border-bottom: 2px solid @maroon;
-}
-
-#clock.date {
-    color: @mauve;
-    border-bottom: 2px solid @mauve;
+    border-bottom: solid @maroon 2px;
+    border-top: solid @maroon 2px;
 }
 
 #battery {
     color: @green;
-    border-bottom: 2px solid @green;
     background-color: #ffffff; /* From default I do not have battery to test it with */
 }
 
@@ -189,7 +188,8 @@ label:focus {
 #network {
     /* background-color: #2980b9; */
     color: @yellow;
-    border-bottom: 2px solid @yellow;
+    border-bottom: solid @yellow 2px;
+    border-top: solid @yellow 2px;
 }
 
 #network.disconnected {
@@ -198,12 +198,12 @@ label:focus {
 
 #pulseaudio {
     color: @blue;
-    border-bottom: 2px solid @blue;
+    border-bottom: solid @blue 2px;
+    border-top: solid @blue 2px;
 }
 
 #pulseaudio.muted {
     color: @blue;
-    border-bottom: 2px solid @blue;
 }
 
 #wireplumber {
@@ -215,37 +215,28 @@ label:focus {
     background-color: #f53c3c;
 }
 
-#custom-media {
-    background-color: #66cc99;
-    color: #2a5c45;
-}
-
-#custom-media.custom-spotify {
-    background-color: #66cc99;
-}
-
-#custom-media.custom-vlc {
-    background-color: #ffa000;
-}
-
 .custom-spotify {
-    padding: 0 4px;
+    padding-right: 4px;
     /* margin: 0 4px; */
     /* background-color: #1DB954; */
-    color: #1DB954;
-    border-bottom: 2px solid #1DB954;
+    color: @green;
+    border-bottom: solid @green 2px;
+    border-top: solid @green 2px;
 }
 
 #custom-exit {
     /* margin: 0px 20px 0px 0px; */
     /* padding:0px; */
-    font-size: 25px;
-    color: white;
+    font-size: 20px;
+    color: @maroon;
+    border-bottom: solid @maroon 2px;
+    border-top: solid @maroon 2px;
 }
 
 #tray {
     /* background-color: #2980b9; */
     border-bottom: 2px solid white;
+    font-size: 20px;
 }
 
 #tray > .passive {
