@@ -1,0 +1,41 @@
+#!/usr/bin/env bash
+
+# if a dir was provided on invoke aka > tmux-sessionizer testdir, else use fzf with project dirs
+if [[ $# -eq 1 ]]; then
+    selected=$1
+else
+    selected=$(find ~/side ~/lth -mindepth 1 -maxdepth 1 -type d | fzf)
+fi
+
+if [[ -z $selected ]]; then
+    exit 0
+fi
+
+selected_name=$(basename "$selected" | tr . _)
+tmux_running=$(pgrep tmux)
+
+# tmux is running and we are not inside it
+if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+    tmux new-session -s $selected_name -c $selected
+    exit 0
+fi
+
+# not inside tmux
+if [[ -z $TMUX ]]; then
+    # Start a new session if it doesn't exist and attach from outside tmux
+    if ! tmux has-session -t=$selected_name 2> /dev/null; then
+        tmux new-session -s $selected_name -c $selected
+    fi
+    tmux attach-session -t $selected_name
+    exit 0
+fi
+
+# inside tmux
+if ! tmux has-session -t=$selected_name 2> /dev/null; then
+    tmux new-session -ds $selected_name -c $selected
+fi
+
+tmux switch-client -t $selected_name
+
+# Should maybe replace with this version?
+# https://github.com/ThePrimeagen/tmux-sessionizer/blob/master/tmux-sessionizer
