@@ -11,7 +11,7 @@ zstyle ':vcs_info:*' check-for-changes true
 
 # set up the prompt
 setopt PROMPT_SUBST
-PROMPT='[%# %F{cyan}%1~%f${vcs_info_msg_0_}] $ '
+PROMPT='[%# %F{cyan}%~%f${vcs_info_msg_0_}] $ '
 
 # default is %n@%m %1~ %#
 #export PROMPT="[$ %1~] %# "
@@ -60,7 +60,7 @@ zstyle ':completion:*' verbose true
 zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#)*=0=01;31'
 zstyle ':completion:*:kill:*' command 'ps -u $USER -o pid,%cpu,tty,cputime,cmd'
 
-source ~/.config/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#source ~/.config/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # to hop by word or line with ctrl or alt and arrow keys
 bindkey "^[[1;5C" forward-word
