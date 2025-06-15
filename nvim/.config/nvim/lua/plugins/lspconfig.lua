@@ -205,6 +205,9 @@ return { -- LSP Configuration & Plugins
         local default_opener = vim.lsp.util.open_floating_preview
         vim.lsp.util.open_floating_preview = rounded_wrapper(default_opener)
 
+        -- For names of language servers that are installed via mason go to ~/.local/share/nvim/mason/bin
+        local nvm = require("utils.nvm")
+
         -- Enable the following language servers
         --  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
         --
@@ -232,28 +235,7 @@ return { -- LSP Configuration & Plugins
                 },
                 -- Since we lazy load nvm else shell startup becomes slow we need to check and load before pyright as it needs node
                 -- not sure if it is better to run it here in command or to use on_new_config, but this seems to work fine so...
-                cmd = (function()
-                    local handle = io.popen([[
-                        export NVM_DIR="$HOME/.nvm"
-                        source "$NVM_DIR/nvm.sh"
-                        which node
-                    ]])
-                    if handle == nil then
-                        vim.notify("failed to souce nvm falling back to system node", vim.log.levels.WARN)
-                        return { "pyright-langserver", "--stdio" }
-                    end
-
-                    local node_path = handle:read("*a")
-                    handle:close()
-                    node_path = vim.fn.trim(node_path)
-
-                    if node_path == "" then
-                        vim.notify("nvm failed to provide node path falling back to system node", vim.log.levels.WARN)
-                        return { "pyright-langserver", "--stdio" }
-                    end
-
-                    return { node_path, vim.fn.exepath("pyright-langserver"), "--stdio" }
-                end)(),
+                cmd = nvm.make_lsp_cmd("pyright-langserver"),
             },
             -- rust_analyzer = {},
             -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
@@ -262,7 +244,9 @@ return { -- LSP Configuration & Plugins
             --    https://github.com/pmizio/typescript-tools.nvim
             --
             -- But for many setups, the LSP (`tsserver`) will work just fine
-            ts_ls = {},
+            ts_ls = {
+                cmd = nvm.make_lsp_cmd("typescript-language-server")
+            },
             -- eslint = {},
             clangd = {},
             lua_ls = {
