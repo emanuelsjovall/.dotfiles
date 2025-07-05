@@ -117,6 +117,9 @@ return { -- Autocompletion
                 { name = 'path' },
                 { name = 'nvim_lsp_signature_help' },
             },
+            formatting = {
+                format = require("nvim-highlight-colors").format
+            },
         })
     end,
 }
