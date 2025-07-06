@@ -3,7 +3,11 @@ return {
     enabled = true,
     -- this is the same as just opts = {}
     -- config = function()
-    --     require('nvim-highlight-colors').setup({})
+    --     require('nvim-highlight-colors').setup({
+    --         render = 'foreground'
+    --     })
     -- end,
-    opts = {},
+    opts = {
+        render = 'foreground',
+    },
 }

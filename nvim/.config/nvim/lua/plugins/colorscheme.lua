@@ -14,8 +14,10 @@ return {
         vim.cmd("hi MatchParen ctermbg=white ctermfg=None guibg=black guifg=grey")
         -- lil fix to stop the statusline for current selected window to be filled with ^^^^^^^^^ (colors are unchanged)
         -- https://vi.stackexchange.com/questions/15873/carets-in-status-line 
-        vim.cmd("highlight StatusLine   cterm=none ctermfg=white ctermbg=black guifg=#858585 guibg=#131313")
-        vim.cmd("highlight StatusLineNC cterm=none ctermfg=black ctermbg=black guifg=white guibg=white")
+        -- vim.cmd("highlight StatusLine   cterm=none ctermfg=white ctermbg=black guifg=#858585 guibg=#131313")
+        -- vim.cmd("highlight StatusLineNC cterm=none ctermfg=black ctermbg=black guifg=white guibg=white")
+        vim.api.nvim_set_hl(0, "StatusLine", {fg = "#858585", bg = "#131313", ctermfg = white, ctermbg = black, cterm = none})
+        vim.api.nvim_set_hl(0, "StatusLineNC", {fg = white, bg = white, ctermfg = black, ctermbg = black, cterm = none})
 
         -- to enable the border around telescope
         --[[ local TelescopeColor = {
