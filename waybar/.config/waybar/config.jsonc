@@ -8,14 +8,14 @@
     "reload_style_on_change": true,
     // Choose the order of the modules
     "modules-left": [
-        "hyprland/workspaces"
+        "hyprland/workspaces",
+        "custom/spotify"
     ],
     "modules-center": [
         // "hyprland/window",
         "clock"
     ],
     "modules-right": [
-        "custom/spotify",
         "mpd",
         "pulseaudio",
         "network",
@@ -106,17 +106,10 @@
         "format": "{icon}   {volume}%{format_source}",
         "format-bluetooth": "{volume}% {icon} {format_source}",
         "format-bluetooth-muted": " {icon} {format_source}",
-        // "format-muted": " {format_source}",
         "format-muted": "{icon}   {volume}%{format_source}",
         "format-source": "",
         "format-source-muted": "   ",
         "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
             "default": ["", "", ""]
         },
         "on-click": "pavucontrol"
