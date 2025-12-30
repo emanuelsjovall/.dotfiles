@@ -95,9 +95,9 @@
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": "({signalStrength}%) ", // {essid} to show wifi name i think
-        "format-ethernet": "<span size='13000' foreground='#f5e0dc'></span>",
-        "tooltip-format": "{ifname} {essid} {ipaddr}/{cidr} via {gwaddr} ", // will show on hover
-        "format-linked": "{ifname} (No IP) ",
+        "format-ethernet": "<span size='13000' foreground='#f5e0dc'>🌐</span>",
+        "tooltip-format": "{ifname} {essid} {ipaddr}/{cidr} via {gwaddr} 🌐", // will show on hover
+        "format-linked": "{ifname} (No IP) 🔗",
         "format-disconnected": "Disconnected ⚠",
         "format-alt": "{ifname}: {essid} {ipaddr}/{cidr} via {gwaddr}" // when you press it we show everything
     },
