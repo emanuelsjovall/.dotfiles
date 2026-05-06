@@ -1,5 +1,6 @@
 return { -- Autoformat
 	"stevearc/conform.nvim",
+	enabled = true,
 	event = { "BufWritePre" },
 	cmd = { "ConformInfo" },
 	keys = {
@@ -30,7 +31,7 @@ return { -- Autoformat
 		end,
 		formatters_by_ft = {
 			go = { "gofmt" },
-			-- lua = { "stylua" },
+			lua = { "stylua" },
 			-- Conform can also run multiple formatters sequentially
 			-- python = { "isort", "black" },
 			--
