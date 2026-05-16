@@ -9,8 +9,8 @@ vim.g.sleuth_c_heuristics = 0
 -- where shiftwidth is the setting
 
 local o = vim.opt
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 
 o.expandtab = true
 o.smarttab = true
@@ -55,13 +55,13 @@ o.writebackup = false
 o.shellcmdflag = "-ic"
 
 -- Preview substitutions live, as you type!
-o.inccommand = 'split'
+o.inccommand = "split"
 
 -- Sets how neovim will display certain whitespace in the editor.
 --  See `:help 'list'`
 --  and `:help 'listchars'`
 o.list = true
-o.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
+o.listchars = { tab = "» ", trail = "·", nbsp = "␣" }
 
 -- Enable break indent
 o.breakindent = true
@@ -70,7 +70,7 @@ o.breakindent = true
 o.undofile = true
 
 -- Keep signcolumn on by default
-o.signcolumn = 'yes'
+o.signcolumn = "yes"
 
 -- Decrease update time
 o.updatetime = 250
@@ -79,7 +79,7 @@ o.updatetime = 250
 -- Displays which-key popup sooner
 o.timeoutlen = 300
 
--- to disable highlight of matching parenthesis 
+-- to disable highlight of matching parenthesis
 -- vim.g.loaded_matchparen = 1
 
 -- vim.diagnostic.config({ virtual_text = true, virtual_lines = { current_line = true }})

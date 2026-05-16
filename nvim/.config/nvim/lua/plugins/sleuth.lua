@@ -1,5 +1,5 @@
 -- auto detect tapstops/indentation level
 return {
-    'tpope/vim-sleuth',
-    enabled = true,
+  "tpope/vim-sleuth",
+  enabled = true,
 }
